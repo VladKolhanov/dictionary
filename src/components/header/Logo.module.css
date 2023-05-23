@@ -1,0 +1,9 @@
+.logo-link {
+   display: inline-block;
+   width: inherit;
+   height: 50px;
+}
+
+.logo-img {
+   height: inherit;
+}

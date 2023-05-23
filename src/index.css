@@ -1,0 +1,17 @@
+:root {
+   --fsz-big: 28px;
+   --fsz-main: 20px;
+   --col-main: #414141;
+   --bcgc-trans-white: #faf6f6d7;
+   --boxsh-form: 4px 4px 5px 2px #afadad;
+}
+
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+body {
+   font-family: 'Roboto', sans-serif;
+}

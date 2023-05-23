@@ -1,0 +1,18 @@
+.header {
+   position: relative;
+   display: grid;
+   grid-template-columns: 90px 1fr;
+   grid-template-rows: 60px;
+   justify-items: center;
+   align-items: center;
+}
+
+.header::after {
+   content: '';
+   position: absolute;
+   bottom: 0;
+   width: 100vw;
+   height: 1px;
+   background-color: #d8caca;
+   box-shadow: 1px 2px 1px 0px #d8caca;
+}

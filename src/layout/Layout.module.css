@@ -1,0 +1,10 @@
+.layout {
+   display: grid;
+   grid-template-columns: minmax(10px, 1fr) minmax(320px, 1400px) minmax(10px, 1fr);
+   grid-template-rows: 100vh;
+   background: url('../assets/bg-main-fone.jpg') no-repeat center center/cover;
+}
+
+.containier {
+   grid-column: 2/3;
+}
