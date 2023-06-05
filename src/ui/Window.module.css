@@ -1,0 +1,8 @@
+.window {
+   width: 60%;
+   border-radius: 25px;
+   padding: 40px 25px;
+   background-color: var(--bcgc-white);
+   box-shadow: var(--boxsh-form);
+   opacity: 0.8;
+}

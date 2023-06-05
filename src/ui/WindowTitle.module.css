@@ -1,0 +1,8 @@
+.title {
+   font-size: var(--fsz-big);
+   text-align: center;
+   margin-bottom: 40px;
+   color: var(--col-main);
+   text-shadow: var(--textsh-title);
+   text-transform: uppercase;
+}

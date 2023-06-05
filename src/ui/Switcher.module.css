@@ -1,0 +1,52 @@
+.switchBox {
+   display: flex;
+   align-items: center;
+   font-size: var(--fsz-main);
+   color: var(--col-main);
+   margin-bottom: 15px;
+}
+
+.switcher {
+   position: relative;
+   width: 60px;
+   height: 28px;
+   margin-right: 20px;
+}
+
+.switcher input {
+   opacity: 0;
+   width: 0;
+   height: 0;
+}
+
+.switcher span {
+   position: absolute;
+   cursor: pointer;
+   background-color: #ccc;
+   border-radius: 28px;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   transition: 0.4s;
+}
+
+.switcher span:before {
+   position: absolute;
+   content: '';
+   width: 28px;
+   height: 24px;
+   left: 2px;
+   bottom: 2px;
+   background-color: #fff;
+   border-radius: 28px;
+   transition: 0.4s;
+}
+
+.switcher input:checked + span {
+   background-color: #8c35dd;
+}
+
+.switcher input:checked + span:before {
+   transform: translateX(100%);
+}

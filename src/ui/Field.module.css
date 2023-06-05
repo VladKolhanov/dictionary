@@ -1,0 +1,68 @@
+.field {
+   position: relative;
+   display: flex;
+   flex-direction: column-reverse;
+}
+
+.field:not(:last-child) {
+   margin-bottom: 30px;
+}
+
+.field span {
+   position: absolute;
+   margin-left: 30px;
+   font-size: var(--fsz-big);
+   font-weight: 400;
+   color: var(--col-title);
+   bottom: 50%;
+   transform: translateY(50%);
+   opacity: 0.8;
+   pointer-events: none;
+   transition: all 0.3s ease;
+   font-style: italic;
+}
+
+.field input {
+   height: 50px;
+   padding-left: 10px;
+   border-radius: 10px;
+   border: transparent;
+   outline: none;
+   font-size: var(--fsz-main);
+   color: var(--col-typography);
+   font-weight: 600;
+   font-style: italic;
+}
+
+.field input:focus {
+   border: 1px solid var(--border-main);
+}
+
+.field input:focus + span,
+.field input:valid + span {
+   margin-left: 20px;
+   font-size: var(--fsz-small);
+   transform: translateY(-15px);
+   background-color: var(--bcgc-white);
+   opacity: 1;
+   transition: all 0.3s ease;
+   font-style: normal;
+   font-weight: 700;
+}
+
+.field.fieldError input {
+   box-shadow: 1px 1px 10px 1px var(--col-error);
+}
+
+.field.fieldError span {
+   color: var(--col-error);
+   background-color: transparent;
+}
+
+.textError {
+   position: absolute;
+   left: 30px;
+   top: -25px;
+   color: var(--col-error);
+   font-weight: 600;
+}

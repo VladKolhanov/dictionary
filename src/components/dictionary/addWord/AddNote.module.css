@@ -1,0 +1,44 @@
+.addNoteWindow {
+   margin: 100px auto 0 auto;
+   animation: 0.5s 1 alternate appear;
+}
+
+.resultInfo {
+   display: flex;
+   flex-direction: column;
+   margin-bottom: 20px;
+}
+
+.resultInfo div {
+   border-bottom: 1px solid var(--border-main);
+   font-size: var(--fsz-main);
+   color: var(--col-main);
+   font-weight: 600;
+   font-style: italic;
+   pointer-events: none;
+}
+
+.resultInfo div:not(:last-child) {
+   margin-bottom: 10px;
+}
+
+.actions {
+   display: flex;
+   justify-content: space-between;
+   margin-top: 15px;
+}
+
+.actions button:disabled {
+   opacity: 0.5;
+}
+
+@keyframes appear {
+   from {
+      transform: translateX(200%);
+      opacity: 0.2;
+   }
+   to {
+      transform: translateX(0%);
+      opacity: 0.8;
+   }
+}

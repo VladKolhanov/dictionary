@@ -3,7 +3,8 @@ import { Layout } from '../layout/Layout'
 import { Home } from '../components/home/Home'
 import { Game } from '../components/game/Game'
 import { Dictionary } from '../components/dictionary/Dictionary'
-import { AddWord } from '../components/dictionary/AddWord'
+import { AddWord } from '../components/dictionary/addWord/AddWord'
+import { AddNote } from '../components/dictionary/addWord/AddNote'
 
 export const routes = createBrowserRouter(
    createRoutesFromElements(
@@ -12,6 +13,7 @@ export const routes = createBrowserRouter(
          <Route path="game" element={<Game />} />
          <Route path="dictionary" element={<Dictionary />} />
          <Route path="/add-word" element={<AddWord />} />
+         <Route path="/add-note" element={<AddNote />} />
       </Route>
    )
 )
