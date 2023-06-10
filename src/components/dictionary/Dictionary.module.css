@@ -1,0 +1,5 @@
+.actions {
+   padding-bottom: 10px;
+   margin-bottom: 10px;
+   border-bottom: 8px double var(--border-main);
+}

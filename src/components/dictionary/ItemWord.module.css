@@ -1,0 +1,48 @@
+.itemWord {
+   display: grid;
+   grid-template-columns: 1fr minmax(70px, 140px);
+   border-bottom: 3px dashed var(--border-main);
+   animation: 1s 1 alternate appear;
+}
+
+.itemContent {
+   display: grid;
+   grid-template-columns: repeat(2, 1fr);
+   grid-template-rows: repeat(2, 50px);
+   align-items: center;
+   color: var(--col-main);
+   column-gap: 40px;
+   align-content: center;
+}
+
+.itemContent .words {
+   font-size: var(--fsz-big);
+}
+
+.itemContent .sentence {
+   font-size: var(--fsz-main);
+   font-style: italic;
+}
+
+.actions {
+   display: grid;
+   justify-items: center;
+   align-items: center;
+   align-content: center;
+   justify-content: center;
+   row-gap: 10px;
+   column-gap: 15px;
+   grid-template-columns: repeat(2, 50px);
+   grid-template-rows: repeat(2, 50px);
+   margin-bottom: 10px;
+}
+
+@keyframes appear {
+   from {
+      opacity: 0;
+      transform: translateY(100%);
+   }
+   to {
+      opacity: 1;
+   }
+}

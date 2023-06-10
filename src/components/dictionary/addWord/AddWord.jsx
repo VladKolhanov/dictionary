@@ -59,11 +59,11 @@ export const AddWord = (props) => {
 
    const formSubmitHandler = async (data) => {
       if (hasNote) {
-         setValues(data)
+         setValues({ ...data, isFavorite: false })
          return navigate('/add-note')
       }
 
-      const response = await addWordIntoDictionary(data)
+      const response = await addWordIntoDictionary({ ...data, isFavorite: false })
 
       if (!response.ok) {
          return showAlertError(4000)
@@ -109,7 +109,7 @@ export const AddWord = (props) => {
                   hasError={!!errors.sentenceEn}
                   error={errors.sentenceEn?.message}
                   required
-                  maxLength="60"
+                  maxLength="80"
                   {...register('sentenceEn')}
                />
                <Field
@@ -118,7 +118,7 @@ export const AddWord = (props) => {
                   hasError={!!errors.sentenceTr}
                   error={errors.sentenceTr?.message}
                   required
-                  maxLength="60"
+                  maxLength="80"
                   {...register('sentenceTr')}
                />
 

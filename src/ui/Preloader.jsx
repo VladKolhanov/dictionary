@@ -1,7 +1,13 @@
 import styles from './Preloader.module.css'
 
-export const Preloader = (props) => (
-   <svg className={styles.preloader} version="1.0" width="40px" height="40px" viewBox="0 0 128 128">
+export const Preloader = ({ className, ...props }) => (
+   <svg
+      className={`${styles.preloader} ${className ? className : ''}`}
+      version="1.0"
+      width="40px"
+      height="40px"
+      viewBox="0 0 128 128"
+   >
       <g>
          <linearGradient id="linear-gradient">
             <stop offset="0%" stopColor="#ffffff" />

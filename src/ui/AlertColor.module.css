@@ -1,0 +1,41 @@
+.alert {
+   position: fixed;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   padding: 10px 30px;
+   background-color: var(--col-ok);
+   font-size: var(--fsz-big);
+   color: #fff;
+   right: 0;
+   border-radius: 5px;
+   pointer-events: none;
+   animation: 3.1s 1 alternate appear;
+}
+
+.alert.alertError {
+   background-color: var(--col-error);
+}
+
+.alert svg {
+   margin-right: 10px;
+}
+
+@keyframes appear {
+   0% {
+      transform: translateX(100%);
+      opacity: 0;
+   }
+   20% {
+      transform: translateX(0%);
+      opacity: 1;
+   }
+   80% {
+      transform: translateX(0%);
+      opacity: 1;
+   }
+   100% {
+      transform: translateX(100%);
+      opacity: 0;
+   }
+}

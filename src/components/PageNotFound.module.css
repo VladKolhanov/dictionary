@@ -1,0 +1,18 @@
+.page {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   height: 100vh;
+   background: url('../assets/bg-main-fone.jpg') no-repeat center center/cover;
+}
+
+.page > :not(:last-child) {
+   margin-bottom: 20px;
+}
+
+.message {
+   font-size: var(--fsz-xxl);
+   color: var(--col-main);
+   font-weight: 700;
+}

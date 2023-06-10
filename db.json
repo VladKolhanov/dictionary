@@ -1,3 +1,50 @@
 {
-   "dictionary": []
+  "dictionary": [
+    {
+      "wordEn": "dasdsa",
+      "wordTr": "czx",
+      "sentenceEn": "casd",
+      "sentenceTr": "asd",
+      "hasNote": false,
+      "isFavorite": false,
+      "id": 1
+    },
+    {
+      "wordEn": "dasd",
+      "wordTr": "asc",
+      "sentenceEn": "zxa",
+      "sentenceTr": "dsdas",
+      "hasNote": true,
+      "isFavorite": false,
+      "note": "dsadascxz",
+      "id": 2
+    },
+    {
+      "wordEn": "fad",
+      "wordTr": "das",
+      "sentenceEn": "dasd",
+      "sentenceTr": "asdas",
+      "hasNote": false,
+      "isFavorite": false,
+      "id": 4
+    },
+    {
+      "wordEn": "ssssssssssssssssssssssssssssss",
+      "wordTr": "ssssssssssssssssssssssssssssss",
+      "sentenceEn": "ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss",
+      "sentenceTr": "ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss",
+      "hasNote": false,
+      "isFavorite": false,
+      "id": 5
+    },
+    {
+      "wordEn": "fdsad",
+      "wordTr": "asdas",
+      "sentenceEn": "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww",
+      "sentenceTr": "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww",
+      "hasNote": false,
+      "isFavorite": false,
+      "id": 6
+    }
+  ]
 }
