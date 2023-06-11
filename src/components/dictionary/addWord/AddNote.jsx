@@ -13,12 +13,12 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useAlert } from '../../../hook/useAlert'
 import { addWordIntoDictionary } from '../../../api/json-server'
 import { useEffect } from 'react'
-import { AlertAddWord } from './AlertAddWord'
+import { AlertAddWord } from '../AlertAddWord'
 
 export const AddNote = (props) => {
    const { data, setValues } = useData()
-   const [isAlertOk, showAlertOk] = useAlert()
-   const [isAlertError, showAlertError] = useAlert()
+   const [alertOk, displayAlertOk] = useAlert()
+   const [alertError, displayAlertError] = useAlert()
    const navigate = useNavigate()
 
    useEffect(() => {
@@ -36,36 +36,36 @@ export const AddNote = (props) => {
 
    const btnBackToAddWordHandler = () => navigate('/add-word')
 
-   const submitFormHndler = async (note) => {
-      const fullDataForm = { ...data, ...note }
+   const submitFormHandler = async (note) => {
+      try {
+         const fullDataForm = { ...data, ...note }
 
-      if (!fullDataForm.note) {
-         fullDataForm.hasNote = false
-         delete fullDataForm.note
+         if (!fullDataForm.note) {
+            fullDataForm.hasNote = false
+            delete fullDataForm.note
+         }
+
+         await addWordIntoDictionary(fullDataForm)
+
+         displayAlertOk('The word was successfully added to the dictionary.', 2500)
+
+         setTimeout(() => {
+            setValues()
+            navigate('/add-word')
+         }, 2500)
+      } catch (error) {
+         displayAlertError(error.message, 2500)
       }
-
-      const response = await addWordIntoDictionary(fullDataForm)
-
-      if (!response.ok) {
-         return showAlertError(4000)
-      }
-
-      showAlertOk(4000)
-
-      setTimeout(() => {
-         setValues()
-         navigate('/add-word')
-      }, 4000)
    }
 
    return (
       <>
-         {isAlertError && <AlertAddWord error />}
-         {isAlertOk && <AlertAddWord ok />}
+         {alertOk && <AlertAddWord message={alertOk} variant="ok" />}
+         {alertError && <AlertAddWord message={alertError} variant="error" />}
 
          <Window className={styles.addNoteWindow}>
             <WindowTitle>Add a note to a word</WindowTitle>
-            <Form noValidate control={control} onSubmit={handleSubmit(submitFormHndler)}>
+            <Form noValidate control={control} onSubmit={handleSubmit(submitFormHandler)}>
                <div className={styles.resultInfo}>
                   <div>
                      {data.wordEn} - {data.wordTr}
@@ -82,7 +82,7 @@ export const AddNote = (props) => {
 
                <div className={styles.actions}>
                   <Button
-                     disabled={isSubmitting || isAlertOk}
+                     disabled={isSubmitting || alertOk}
                      type="button"
                      icon={<BiShare />}
                      onClick={btnBackToAddWordHandler}
@@ -91,11 +91,11 @@ export const AddNote = (props) => {
                   </Button>
 
                   <Button
-                     disabled={isSubmitting || isAlertOk}
+                     disabled={isSubmitting || alertOk}
                      type="submit"
                      icon={<BiPlus />}
                      hasPreloader
-                     isSubmitting={isSubmitting || isAlertOk}
+                     isSubmitting={isSubmitting || alertOk}
                   >
                      Add Word
                   </Button>

@@ -7,7 +7,20 @@ import { MdOutlineDeleteForever } from 'react-icons/md'
 import { BiPencil } from 'react-icons/bi'
 
 export const ItemWord = (props) => {
-   const { wordEn, wordTr, sentenceEn, sentenceTr, id, isFavorite, onFavorite, onDelet } = props
+   const {
+      wordEn,
+      wordTr,
+      sentenceEn,
+      sentenceTr,
+      hasNote,
+      note,
+      id,
+      isFavorite,
+      onFavorite,
+      onDelet,
+      onOpenNoteWord,
+      onOpenRedateWindow,
+   } = props
 
    const sliceString = (string, length) =>
       string.length > length ? `${string.slice(0, length)} ...` : string
@@ -21,18 +34,28 @@ export const ItemWord = (props) => {
             <p className={styles.sentence}>{sliceString(sentenceTr, 35)}</p>
          </div>
          <div className={styles.actions}>
-            <ButtonCircle type="button" favorite={isFavorite} onClick={() => onFavorite(props)}>
-               {isFavorite ? <BsStarFill /> : <BsStar />}
-            </ButtonCircle>
-            <ButtonCircle type="button" onClick={() => onDelet(id)}>
-               <MdOutlineDeleteForever />
-            </ButtonCircle>
-            <ButtonCircle type="button">
-               <BiPencil />
-            </ButtonCircle>
-            <ButtonCircle type="button">
-               <BiNotepad />
-            </ButtonCircle>
+            <ButtonCircle
+               icon={isFavorite ? <BsStarFill /> : <BsStar />}
+               type="button"
+               favorite={isFavorite}
+               onClick={() => onFavorite(props)}
+            ></ButtonCircle>
+            <ButtonCircle
+               icon={<MdOutlineDeleteForever />}
+               type="button"
+               onClick={() => onDelet(id)}
+            ></ButtonCircle>
+            <ButtonCircle
+               icon={<BiPencil />}
+               type="button"
+               onClick={() => onOpenRedateWindow(id)}
+            ></ButtonCircle>
+            <ButtonCircle
+               icon={<BiNotepad />}
+               type="button"
+               disabled={!hasNote}
+               onClick={() => onOpenNoteWord({ wordEn, note })}
+            ></ButtonCircle>
          </div>
       </div>
    )

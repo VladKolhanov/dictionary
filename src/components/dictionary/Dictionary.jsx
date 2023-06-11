@@ -4,19 +4,22 @@ import { ListWord } from './ListWord'
 import { Button } from '../../ui/Button'
 import { AlertDeleted } from './AlertDeleted'
 import { useAlert } from '../../hook/useAlert'
+import { BiPlus } from 'react-icons/bi'
 
 export const Dictionary = (props) => {
    const navigate = useNavigate()
 
-   const [stateAlertOk, displayAlertOk] = useAlert()
-   const [stateAlertError, displayAlertError] = useAlert()
+   const [alertOk, displayAlertOk] = useAlert()
+   const [alertError, displayAlertError] = useAlert()
 
    return (
       <>
-         {stateAlertOk && <AlertDeleted ok />}
-         {stateAlertError && <AlertDeleted error />}
+         {alertOk && <AlertDeleted message={alertOk} variant="ok" />}
+         {alertError && <AlertDeleted message={alertError} variant="error" />}
          <div className={styles.actions}>
-            <Button onClick={() => navigate('/add-word')}>add new word</Button>
+            <Button icon={<BiPlus />} onClick={() => navigate('/add-word')}>
+               add new word
+            </Button>
          </div>
          <ListWord onDisplayAlertOk={displayAlertOk} onDisplayAlertError={displayAlertError} />
       </>

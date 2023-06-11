@@ -1,14 +1,14 @@
 import { useState } from 'react'
 
 export const useAlert = () => {
-   const [stateAlert, setStateAlert] = useState(false)
+   const [alertInfo, setAlertInfo] = useState('')
 
    return [
-      stateAlert,
-      (time) => {
-         setStateAlert(true)
+      alertInfo,
+      (message, time) => {
+         setAlertInfo(message)
 
-         setTimeout(() => setStateAlert(false), time)
+         setTimeout(() => setAlertInfo(''), time)
       },
    ]
 }

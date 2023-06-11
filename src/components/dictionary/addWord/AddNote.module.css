@@ -28,10 +28,6 @@
    margin-top: 15px;
 }
 
-.actions button:disabled {
-   opacity: 0.5;
-}
-
 @keyframes appear {
    from {
       transform: translateX(200%);

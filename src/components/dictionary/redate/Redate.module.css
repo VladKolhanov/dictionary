@@ -1,0 +1,17 @@
+.preloader {
+   position: relative;
+   inset: 50% 50%;
+   transform: translate(-50%, 50%);
+   width: 20%;
+   height: 20%;
+}
+
+.window {
+   margin: 100px auto 0 auto;
+}
+
+.action {
+   display: flex;
+   justify-content: space-between;
+   margin-top: 15px;
+}

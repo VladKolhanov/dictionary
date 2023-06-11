@@ -1,0 +1,17 @@
+[33mcommit 00272839caadcfb5445eb7fd6f35ff33803c237d[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: Vlad Kolhanov <vladi.kolganov@gmail.com>
+Date:   Sat Jun 10 10:10:06 2023 +0300
+
+    Alert refactoring
+
+[33mcommit 6948bd80ac280d07a504b961b929d8fae60c447d[m
+Author: Vlad Kolhanov <vladi.kolganov@gmail.com>
+Date:   Mon Jun 5 12:57:58 2023 +0300
+
+    form AddWord completed
+
+[33mcommit 8a33f8dfb4989f2720885d87a2809d7e69438aa2[m
+Author: Vlad Kolhanov <vladi.kolganov@gmail.com>
+Date:   Tue May 23 17:42:31 2023 +0300
+
+    header complited

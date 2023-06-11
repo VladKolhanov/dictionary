@@ -5,6 +5,21 @@
    box-shadow: var(--boxsh-btn);
    color: var(--col-main);
    border-color: var(--border-main);
+   cursor: pointer;
+}
+
+.button:disabled {
+   opacity: 0.5;
+   box-shadow: none;
+   cursor: auto;
+}
+
+.button:disabled:hover {
+   color: var(--col-main);
+   border-color: var(--border-main);
+   transform: translate(0px);
+
+   transition: none;
 }
 
 .button:hover {

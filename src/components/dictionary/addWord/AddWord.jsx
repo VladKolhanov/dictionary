@@ -15,12 +15,12 @@ import { Switcher } from '../../../ui/Switcher'
 import { WindowTitle } from '../../../ui/WindowTitle'
 import { useData } from '../../../context/dictionaryContext'
 import { useAlert } from '../../../hook/useAlert'
-import { AlertAddWord } from './AlertAddWord'
+import { AlertAddWord } from '../AlertAddWord'
 
 export const AddWord = (props) => {
    const { data, setValues } = useData()
-   const [isAlertOk, showAlertOk] = useAlert()
-   const [isAlertError, showAlertError] = useAlert()
+   const [alertOk, displayAlertOk] = useAlert()
+   const [alertError, displayAlertError] = useAlert()
 
    const schema = yup.object({
       wordEn: yup.string().trim().lowercase().required('Field should be filled'),
@@ -58,28 +58,28 @@ export const AddWord = (props) => {
    }
 
    const formSubmitHandler = async (data) => {
-      if (hasNote) {
-         setValues({ ...data, isFavorite: false })
-         return navigate('/add-note')
+      try {
+         if (hasNote) {
+            setValues({ ...data, isFavorite: false })
+            return navigate('/add-note')
+         }
+
+         await addWordIntoDictionary({ ...data, isFavorite: false })
+
+         reset()
+         setValues()
+         displayAlertOk('The word was successfully added to the dictionary.', 2500)
+      } catch (error) {
+         displayAlertError(error.message, 2500)
       }
-
-      const response = await addWordIntoDictionary({ ...data, isFavorite: false })
-
-      if (!response.ok) {
-         return showAlertError(4000)
-      }
-
-      reset()
-      setValues()
-      showAlertOk(4000)
    }
 
    const hasNote = watch('hasNote')
 
    return (
       <>
-         {isAlertError && <AlertAddWord error />}
-         {isAlertOk && <AlertAddWord ok />}
+         {alertOk && <AlertAddWord message={alertOk} variant="ok" />}
+         {alertError && <AlertAddWord message={alertError} variant="error" />}
 
          <Window className={`${styles.addWordWindow} ${data.wordEn ? styles.back : ''}`}>
             <WindowTitle>Add word into dictionary</WindowTitle>

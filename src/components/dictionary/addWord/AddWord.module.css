@@ -8,10 +8,6 @@
    margin-top: 15px;
 }
 
-.actions button:disabled {
-   opacity: 0.5;
-}
-
 .back {
    animation: 0.5s 1 alternate appear;
 }

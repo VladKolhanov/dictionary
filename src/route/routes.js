@@ -6,6 +6,7 @@ import { Dictionary } from '../components/dictionary/Dictionary'
 import { AddWord } from '../components/dictionary/addWord/AddWord'
 import { AddNote } from '../components/dictionary/addWord/AddNote'
 import { PageNotFound } from '../components/PageNotFound'
+import { Redate } from '../components/dictionary/redate/Redate'
 
 export const routes = createBrowserRouter(
    createRoutesFromElements([
@@ -13,6 +14,7 @@ export const routes = createBrowserRouter(
          <Route index element={<Home />} />
          <Route path="game" element={<Game />} />
          <Route path="dictionary" element={<Dictionary />} />
+         <Route path="dictionary/:wordId" element={<Redate />} />
          <Route path="/add-word" element={<AddWord />} />
          <Route path="/add-note" element={<AddNote />} />
       </Route>,

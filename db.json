@@ -1,50 +1,33 @@
 {
   "dictionary": [
     {
-      "wordEn": "dasdsa",
-      "wordTr": "czx",
-      "sentenceEn": "casd",
-      "sentenceTr": "asd",
       "hasNote": false,
+      "sentenceTr": "Это мой дом",
+      "sentenceEn": "This is my home",
+      "wordTr": "дом",
+      "wordEn": "home",
       "isFavorite": false,
       "id": 1
     },
     {
-      "wordEn": "dasd",
-      "wordTr": "asc",
-      "sentenceEn": "zxa",
-      "sentenceTr": "dsdas",
       "hasNote": true,
+      "sentenceTr": "Это самолёт летит в Испанию",
+      "sentenceEn": "This airplane is flying to Spain",
+      "wordTr": "самолёт",
+      "wordEn": "airplane",
       "isFavorite": false,
-      "note": "dsadascxz",
+      "note": "\"is -ing\" - Означает \"Он делает в данные момент\". Самолёт летит в Испанию.",
       "id": 2
     },
     {
-      "wordEn": "fad",
-      "wordTr": "das",
-      "sentenceEn": "dasd",
-      "sentenceTr": "asdas",
-      "hasNote": false,
+      "wordEn": "выф",
+      "wordTr": "вс",
+      "sentenceEn": "яч",
+      "sentenceTr": "вфывфы",
+      "hasNote": true,
       "isFavorite": false,
-      "id": 4
-    },
-    {
-      "wordEn": "ssssssssssssssssssssssssssssss",
-      "wordTr": "ssssssssssssssssssssssssssssss",
-      "sentenceEn": "ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss",
-      "sentenceTr": "ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss",
-      "hasNote": false,
-      "isFavorite": false,
-      "id": 5
-    },
-    {
-      "wordEn": "fdsad",
-      "wordTr": "asdas",
-      "sentenceEn": "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww",
-      "sentenceTr": "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww",
-      "hasNote": false,
-      "isFavorite": false,
-      "id": 6
+      "id": 3,
+      "note": "dasdsa"
     }
   ]
 }
