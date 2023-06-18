@@ -22,22 +22,19 @@ export const ItemWord = (props) => {
       onOpenRedateWindow,
    } = props
 
-   const sliceString = (string, length) =>
-      string.length > length ? `${string.slice(0, length)} ...` : string
-
    return (
       <div className={styles.itemWord}>
          <div className={styles.itemContent}>
             <div className={styles.words}>{wordEn}</div>
             <div className={styles.words}>{wordTr}</div>
-            <p className={styles.sentence}>{sliceString(sentenceEn, 35)}</p>
-            <p className={styles.sentence}>{sliceString(sentenceTr, 35)}</p>
+            <p className={styles.sentence}>{sentenceEn}</p>
+            <p className={styles.sentence}>{sentenceTr}</p>
          </div>
          <div className={styles.actions}>
             <ButtonCircle
                icon={isFavorite ? <BsStarFill /> : <BsStar />}
                type="button"
-               favorite={isFavorite}
+               active={isFavorite}
                onClick={() => onFavorite(props)}
             ></ButtonCircle>
             <ButtonCircle

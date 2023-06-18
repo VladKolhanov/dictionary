@@ -6,46 +6,60 @@ import { Preloader } from '../../ui/Preloader'
 import { Note } from './note/Note'
 import { createPortal } from 'react-dom'
 import { useNavigate } from 'react-router-dom'
+import { BiError } from 'react-icons/bi'
+import { Pagination } from './Pagination'
 
-export const ListWord = ({ onDisplayAlertOk, onDisplayAlertError }) => {
+export const ListWord = ({ onDisplayAlertOk, onDisplayAlertError, onSetTotalWords }) => {
    const [wordsList, setWordsList] = useState(null)
+   const [dictionaryInfo, setDictionaryInfo] = useState({})
    const [isLoadingData, setIsLoadingData] = useState(false)
    const [noteWord, setNoteWord] = useState(null)
+   const [crashLoadDataErrorMessage, setCrashLoadDataErrorMessage] = useState('')
+   const [currentPage, setCurrentPage] = useState(1)
 
    const navigate = useNavigate()
 
-   const getNewData = async () => {
+   const getNewData = async (page, limit = 15) => {
       try {
-         setWordsList(await getWordsFromDataBase())
+         const { data, dictionaryInfo } = await getWordsFromDataBase(page, limit)
+         setWordsList(data)
+         setDictionaryInfo(dictionaryInfo)
+         onSetTotalWords(dictionaryInfo.totalCount)
       } catch (error) {
-         ////////////
+         setCrashLoadDataErrorMessage(error.message)
+         setIsLoadingData(false)
+         setWordsList(false)
       }
    }
 
    useEffect(() => {
       const fetchData = async () => {
          setIsLoadingData(true)
-         await getNewData()
+         await getNewData(currentPage)
          setIsLoadingData(false)
       }
 
       fetchData()
-   }, [])
+   }, [currentPage])
 
    const onFavorite = async (data) => {
-      await putChangeWord({
-         ...data,
-         isFavorite: !data.isFavorite,
-      })
+      try {
+         await putChangeWord({
+            ...data,
+            isFavorite: !data.isFavorite,
+         })
+      } catch (error) {
+         onDisplayAlertError(error.message, 3000)
+      }
 
-      getNewData()
+      getNewData(currentPage)
    }
 
    const onDelet = async (id) => {
       try {
          await deleteWord(id)
          onDisplayAlertOk('Deleted', 3000)
-         getNewData()
+         getNewData(currentPage)
       } catch (error) {
          onDisplayAlertError(error.message, 3000)
       }
@@ -65,11 +79,18 @@ export const ListWord = ({ onDisplayAlertOk, onDisplayAlertError }) => {
             )}
 
          <div className={styles.wordList}>
-            {isLoadingData || (!wordsList && <Preloader className={styles.preloader} />)}
+            {isLoadingData && <Preloader className={styles.preloader} />}
 
             {wordsList && wordsList.length === 0 && !isLoadingData && (
-               <p className={styles.emptyListMessage}>
+               <p className={styles.listMessage}>
                   Please, press on the button "ADD NEW WORD" for add word into dictionary!
+               </p>
+            )}
+
+            {crashLoadDataErrorMessage && (
+               <p className={`${styles.listMessage} ${styles.error}`}>
+                  <BiError />
+                  {crashLoadDataErrorMessage}
                </p>
             )}
 
@@ -85,6 +106,14 @@ export const ListWord = ({ onDisplayAlertOk, onDisplayAlertError }) => {
                   />
                ))}
          </div>
+
+         {!crashLoadDataErrorMessage && (
+            <Pagination
+               dictionaryInfo={dictionaryInfo}
+               currentPage={currentPage}
+               onSetCurrentPage={setCurrentPage}
+            />
+         )}
       </>
    )
 }

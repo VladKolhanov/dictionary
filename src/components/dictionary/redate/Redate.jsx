@@ -15,9 +15,11 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { useAlert } from '../../../hook/useAlert'
 import { AlertAddWord } from '../AlertAddWord'
+import { ErrorDownloadData } from './ErrorDownloadData'
 
 export const Redate = (props) => {
    const [wordData, setWordData] = useState(null)
+   const [errorDownloadWordData, setErrorDownloadWordData] = useState('')
    const { wordId } = useParams()
 
    const [alertOk, displayAlertOk] = useAlert()
@@ -47,7 +49,7 @@ export const Redate = (props) => {
             note: responseData.note,
          }
       } catch (error) {
-         ///////////////////////////
+         setErrorDownloadWordData(error.message)
       }
    }
 
@@ -87,6 +89,10 @@ export const Redate = (props) => {
       } catch (error) {
          displayAlertError(error.message, 2500)
       }
+   }
+
+   if (errorDownloadWordData) {
+      return <ErrorDownloadData message={errorDownloadWordData} />
    }
 
    return (

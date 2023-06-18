@@ -1,0 +1,21 @@
+.window {
+   margin: 30vh auto 0 auto;
+   display: grid;
+   justify-items: center;
+   color: var(--col-error);
+   grid-gap: 30px;
+}
+
+.exclamation {
+   font-size: 100px;
+}
+
+.message {
+   font-size: var(--fsz-xxl);
+   text-align: center;
+   font-weight: 700;
+}
+
+.button {
+   color: var(--col-error);
+}

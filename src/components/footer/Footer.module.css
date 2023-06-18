@@ -1,0 +1,29 @@
+.footer {
+   position: relative;
+   display: grid;
+   grid-template-rows: 60px;
+   grid-template-columns: repeat(2, 1fr);
+   justify-items: center;
+   align-items: center;
+}
+
+.footer::before {
+   content: '';
+   position: absolute;
+   top: 0;
+   width: 100vw;
+   height: 1px;
+   background-color: #d8caca;
+   box-shadow: 1px 2px 1px 0px #d8caca;
+}
+
+.text {
+   font-size: var(--fsz-big);
+   color: var(--col-title);
+}
+
+.link {
+   font-size: var(--fsz-main);
+   color: var(--col-main);
+   text-decoration: none;
+}

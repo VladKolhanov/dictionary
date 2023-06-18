@@ -9,9 +9,6 @@ export const NavBar = () => {
             Dictionary
          </NavLink>
          <NavLink className={activeLink} to="game">
-            Translator
-         </NavLink>
-         <NavLink className={activeLink} to="game">
             Game
          </NavLink>
       </nav>

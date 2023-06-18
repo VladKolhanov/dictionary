@@ -1,0 +1,25 @@
+.pagination {
+   display: grid;
+   grid-template-rows: 50px;
+   grid-template-columns: repeat(auto-fit, 50px);
+   justify-content: center;
+   justify-items: center;
+   align-items: center;
+   grid-gap: 15px;
+   animation: 3s 1 alternate appear;
+   margin-bottom: 30px;
+}
+
+.pagination svg {
+   width: 80%;
+   height: 80%;
+}
+
+@keyframes appear {
+   from {
+      opacity: 0;
+   }
+   to {
+      opacity: 1;
+   }
+}

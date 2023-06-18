@@ -17,11 +17,17 @@
 
 .itemContent .words {
    font-size: var(--fsz-big);
+   text-overflow: ellipsis;
+   white-space: nowrap;
+   overflow: hidden;
 }
 
 .itemContent .sentence {
    font-size: var(--fsz-main);
    font-style: italic;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+   overflow: hidden;
 }
 
 .actions {

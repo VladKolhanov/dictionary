@@ -2,12 +2,7 @@
    padding: 10px 15px;
    display: grid;
    grid-gap: 20px;
-}
-
-.emptyListMessage {
-   text-align: center;
-   font-size: var(--fsz-xxl);
-   color: var(--col-main);
+   margin-bottom: 25px;
 }
 
 .preloader {
@@ -15,4 +10,22 @@
    width: 200px;
    height: 200px;
    margin-top: 150px;
+}
+
+.listMessage {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   font-size: var(--fsz-xxl);
+   font-weight: 700;
+   margin-top: 30px;
+   text-align: center;
+}
+
+.listMessage svg {
+   margin-right: 20px;
+}
+
+.listMessage.error {
+   color: var(--col-error);
 }

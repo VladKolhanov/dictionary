@@ -10,22 +10,28 @@ export const addWordIntoDictionary = async (data) => {
    }
 }
 
-export const getWordsFromDataBase = async () => {
-   const response = await fetch('http://localhost:4000/dictionary')
+export const getWordsFromDataBase = async (page, limit) => {
+   const response = await fetch(
+      `http://localhost:4000/dictionary?_sort=id&_order=desc&_page=${page}&_limit=${limit}`
+   )
 
    if (!response.ok) {
-      throw new Error('Failed to load data. Please try again.')
+      throw new Error('Failed to load data. Please reload this page.')
    }
 
+   const totalCount = response.headers.get('X-Total-Count')
+   const allPages = Math.ceil(totalCount / limit)
+
    const data = await response.json()
-   return data
+
+   return { data, dictionaryInfo: { totalCount, allPages } }
 }
 
 export const getWordFromDataBase = async (wordId) => {
    const response = await fetch(`http://localhost:4000/dictionary/${wordId}`)
 
    if (!response.ok) {
-      throw new Error('Failed to load data. Please try again.')
+      throw new Error('Failed to load data. Please return to dictionary and try again.')
    }
 
    const data = await response.json()
