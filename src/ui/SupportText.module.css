@@ -1,0 +1,11 @@
+.supportInfo {
+   text-align: center;
+   font-size: var(--fsz-xxl);
+   color: var(--col-main);
+   font-style: italic;
+   font-weight: 600;
+}
+
+.supportInfo span {
+   text-decoration: underline;
+}

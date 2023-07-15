@@ -1,5 +1,7 @@
+const baseUrl = 'http://localhost:4000/dictionary'
+
 export const addWordIntoDictionary = async (data) => {
-   const response = await fetch('http://localhost:4000/dictionary', {
+   const response = await fetch(`${baseUrl}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
@@ -11,9 +13,7 @@ export const addWordIntoDictionary = async (data) => {
 }
 
 export const getWordsFromDataBase = async (page, limit) => {
-   const response = await fetch(
-      `http://localhost:4000/dictionary?_sort=id&_order=desc&_page=${page}&_limit=${limit}`
-   )
+   const response = await fetch(`${baseUrl}?_sort=id&_order=desc&_page=${page}&_limit=${limit}`)
 
    if (!response.ok) {
       throw new Error('Failed to load data. Please reload this page.')
@@ -27,8 +27,28 @@ export const getWordsFromDataBase = async (page, limit) => {
    return { data, dictionaryInfo: { totalCount, allPages } }
 }
 
+export const getWordsForGame = async (limit) => {
+   const response =
+      limit === 'all'
+         ? await fetch(`${baseUrl}?_sort=id&_order=desc`)
+         : await fetch(`${baseUrl}?_sort=id&_order=desc&_limit=${limit}`)
+
+   if (!response.ok) {
+      throw new Error('Failed to load data. Please check your network access')
+   }
+
+   const data = await response.json()
+
+   const words = data.reduce((acc, item) => {
+      acc.push({ wordEn: item.wordEn, wordTr: item.wordTr, id: item.id })
+      return acc
+   }, [])
+
+   return words
+}
+
 export const getWordFromDataBase = async (wordId) => {
-   const response = await fetch(`http://localhost:4000/dictionary/${wordId}`)
+   const response = await fetch(`${baseUrl}/${wordId}`)
 
    if (!response.ok) {
       throw new Error('Failed to load data. Please return to dictionary and try again.')
@@ -39,7 +59,7 @@ export const getWordFromDataBase = async (wordId) => {
 }
 
 export const putChangeWord = async (item) => {
-   const response = await fetch(`http://localhost:4000/dictionary/${item.id}`, {
+   const response = await fetch(`${baseUrl}/${item.id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(item),
@@ -54,7 +74,7 @@ export const putChangeWord = async (item) => {
 }
 
 export const deleteWord = async (id) => {
-   const response = await fetch(`http://localhost:4000/dictionary/${id}`, {
+   const response = await fetch(`${baseUrl}/${id}`, {
       method: 'DELETE',
    })
 

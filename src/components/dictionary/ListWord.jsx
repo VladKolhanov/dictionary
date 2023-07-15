@@ -33,13 +33,9 @@ export const ListWord = ({ onDisplayAlertOk, onDisplayAlertError, onSetTotalWord
    }
 
    useEffect(() => {
-      const fetchData = async () => {
-         setIsLoadingData(true)
-         await getNewData(currentPage)
-         setIsLoadingData(false)
-      }
-
-      fetchData()
+      setIsLoadingData(true)
+      getNewData(currentPage)
+      setIsLoadingData(false)
    }, [currentPage])
 
    const onFavorite = async (data) => {

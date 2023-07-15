@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom'
 import { addWordIntoDictionary } from '../../../api/json-server'
 import { Switcher } from '../../../ui/Switcher'
 import { WindowTitle } from '../../../ui/WindowTitle'
-import { useData } from '../../../context/dictionaryContext'
+import { useData } from '../../../context/EnterFieldContext'
 import { useAlert } from '../../../hook/useAlert'
 import { AlertAddWord } from '../AlertAddWord'
 

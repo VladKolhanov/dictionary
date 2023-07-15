@@ -1,0 +1,27 @@
+.gameInfo {
+   font-size: var(--fsz-big);
+   margin-bottom: 30px;
+   color: var(--col-main);
+   text-indent: 35px;
+}
+
+.listSettings {
+   list-style: inside;
+   margin-bottom: 30px;
+   color: var(--col-main);
+}
+
+.listSettings h3 {
+   font-size: var(--fsz-big);
+   font-weight: 600;
+   margin-bottom: 15px;
+   color: var(--col-title);
+}
+
+.listSettings li {
+   font-size: var(--fsz-main);
+   line-height: 150%;
+   margin-left: 35px;
+}
+
+

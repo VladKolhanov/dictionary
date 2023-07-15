@@ -1,0 +1,43 @@
+.radioButton {
+   display: flex;
+   flex-direction: row-reverse;
+   justify-content: center;
+   align-items: center;
+}
+
+.radioButton:not(:last-child) {
+   margin-right: 20px;
+}
+
+.radioButton label {
+   display: flex;
+   align-items: center;
+   padding: 10px 14px;
+   font-size: var(--fsz-main);
+   background-color: transparent;
+   border: 1px solid var(--border-main);
+   cursor: pointer;
+   color: var(--col-main);
+   border-radius: 15px;
+   text-transform: uppercase;
+   font-weight: 600;
+}
+
+.radioButton label:hover {
+   transform: translate(1px, 1px);
+   transition: all 0.3s ease;
+   border: 1px solid var(--hover-col);
+   color: var(--hover-col);
+}
+
+.radioButton input {
+   width: 0px;
+   height: 0px;
+   visibility: hidden;
+}
+
+.radioButton input:checked ~ label {
+   transform: translate(1px, 1px);
+   border: 1px solid var(--hover-col);
+   color: var(--hover-col);
+}
