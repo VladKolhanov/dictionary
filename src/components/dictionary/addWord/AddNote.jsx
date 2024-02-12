@@ -11,7 +11,7 @@ import { TextArea } from '../../../ui/TextArea'
 import { useData } from '../../../context/EnterFieldContext'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useAlert } from '../../../hook/useAlert'
-import { addWordIntoDictionary } from '../../../api/json-server'
+import { addWordIntoDictionary, checkWordIntoDictionary } from '../../../api/json-server'
 import { useEffect } from 'react'
 import { AlertAddWord } from '../AlertAddWord'
 
@@ -44,6 +44,12 @@ export const AddNote = (props) => {
             fullDataForm.hasNote = false
             delete fullDataForm.note
          }
+
+         // if this word already in the dictionary throw Error
+
+         await checkWordIntoDictionary(fullDataForm.wordEn)
+
+         // if this word not in the dictonary, it will added
 
          await addWordIntoDictionary(fullDataForm)
 

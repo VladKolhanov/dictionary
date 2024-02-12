@@ -1,5 +1,39 @@
-.actions {
+.actionsPanel {
    padding-bottom: 10px;
    margin-bottom: 10px;
    border-bottom: 8px double var(--border-main);
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
+
+.searchField {
+   min-width: 550px;
+   height: 55px;
+   border-radius: 10px;
+   font-size: var(--fsz-big);
+   padding-left: 10px;
+   color: var(--col-typography);
+   font-style: italic;
+   border-color: var(--border-main);
+   outline-color: var(--col-main);
+}
+
+.counter {
+   font-size: var(--fsz-main);
+   color: var(--col-main);
+   background-color: #dfd1d1;
+   padding: 0 10px;
+   height: 55px;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   border-radius: 10px;
+}
+
+.counter span {
+   font-size: 24px;
+   font-weight: 600;
+   color: var(--col-title);
 }

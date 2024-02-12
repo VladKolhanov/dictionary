@@ -1,0 +1,33 @@
+.windowSettingsGame {
+   margin: 10vh auto 0 auto;
+}
+
+.active {
+   display: flex;
+   justify-content: space-between;
+}
+
+.btnContinue {
+   display: flex;
+   flex-direction: row-reverse;
+}
+.btnContinue svg {
+   margin: 0px 0px 0px 10px;
+}
+
+.windowSettingsGame form {
+   margin: 0 0 50px 0;
+}
+
+.windowSettingsGame fieldset {
+   display: flex;
+   margin-bottom: 15px;
+   border: none;
+}
+
+.windowSettingsGame legend {
+   font-size: var(--fsz-big);
+   color: var(--col-title);
+   margin-bottom: 20px;
+}
+

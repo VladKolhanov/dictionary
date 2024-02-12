@@ -1,39 +1,41 @@
-import { useNavigate } from 'react-router-dom'
-import { getWordsForGame } from '../../api/json-server'
-import { useTimer } from '../../hook/useTimer'
-import { Form } from '../../ui/Form'
-import { Window } from '../../ui/Window'
-import { WindowTitle } from '../../ui/WindowTitle'
-import { InfoAboutGame } from './InfoAboutGame'
-import styles from './PlayGame.module.css'
-import React, { useEffect, useRef, useState } from 'react'
-import { SupportText } from '../../ui/SupportText'
+import styles from './PlayGameWord.module.css'
 
-export const PlayGame = ({ wordsQuantity, language, responseTime, typeGame }) => {
-   const [words, setWords] = useState([])
-   const [isGameStarted, setIsGameStarted] = useState(false)
+import React, { useEffect, useState } from 'react'
+import { WindowTitle } from '../../../ui/WindowTitle'
+import { Window } from '../../../ui/Window'
+import { Form } from '../../../ui/Form'
+import { SupportText } from '../../../ui/SupportText'
+import { getWordsForGame } from '../../../api/json-server'
+import { useNavigate } from 'react-router-dom'
+import { useTimer } from '../../../hook/useTimer'
+import { useResultGame } from '../../../context/ResultGameContext'
+
+export const PlayGameWord = ({ settings }) => {
+   const { setResultGameValue } = useResultGame()
    const [stepsQuantity, setStepsQuantity] = useState(25)
+   const [words, setWords] = useState([])
    const [stepsTaken, setStepsTaken] = useState([])
    const [currentSteps, setCurrentSteps] = useState(null)
    const [inputAnswer, setInputAnswer] = useState('')
 
-   const windowRef = useRef(null)
    const navigate = useNavigate()
-
-   const [timer, resumeTime] = useTimer(responseTime)
+   const [timer, resumeTime] = useTimer(settings.responseTime)
 
    useEffect(() => {
-      windowRef.current.focus()
-      ;(async () => setWords(await getWordsForGame(wordsQuantity)))()
+      if (settings) {
+         ;(async () => setWords(await getWordsForGame(settings.wordsQuantity)))()
+      }
    }, [])
 
    useEffect(() => {
       if (stepsTaken.length === stepsQuantity) {
-         return navigate('/')
+         setResultGameValue(stepsTaken)
+         return navigate('/game-result')
       }
 
+      resumeTime()
       generateRandomWord()
-   }, [isGameStarted, stepsTaken])
+   }, [stepsTaken, words])
 
    const generateRandomWord = () => {
       let currentObj
@@ -46,18 +48,15 @@ export const PlayGame = ({ wordsQuantity, language, responseTime, typeGame }) =>
       return setCurrentSteps(currentObj)
    }
 
-   const handleStartGame = (e) => {
-      if (e.code === 'Space' && !isGameStarted) {
-         setIsGameStarted(true)
-         resumeTime()
-      }
-   }
-
    const handleSubmitResponse = (e) => {
       e.preventDefault()
-      currentSteps[language === 'english' ? 'wordTr' : 'wordEn'] ===
-      inputAnswer.trim().toLowerCase()
-         ? setStepsTaken((p) => [...p, { ...currentSteps, isCorrectResponse: true }])
+
+      currentSteps[settings.language === 'english' ? 'wordTr' : 'wordEn'] ===
+         inputAnswer.trim().toLowerCase() && inputAnswer
+         ? setStepsTaken((p) => [
+              ...p,
+              { ...currentSteps, inputTranslate: inputAnswer, isCorrectResponse: true },
+           ])
          : setStepsTaken((p) => [
               ...p,
               { ...currentSteps, inputTranslate: inputAnswer, isCorrectResponse: false },
@@ -78,17 +77,10 @@ export const PlayGame = ({ wordsQuantity, language, responseTime, typeGame }) =>
    }
 
    return (
-      <Window ref={windowRef} tabIndex={-1} onKeyDown={handleStartGame} className={styles.window}>
-         <WindowTitle>Game "{typeGame}"</WindowTitle>
-         {!isGameStarted && (
-            <InfoAboutGame
-               wordsQuantity={wordsQuantity}
-               language={language}
-               responseTime={responseTime}
-            />
-         )}
+      <>
+         <Window className={styles.window}>
+            <WindowTitle>Game "{settings.gameName}"</WindowTitle>
 
-         {isGameStarted && (
             <>
                <p className={styles.stepInfo}>
                   Step {stepsTaken.length + 1} of {stepsQuantity}
@@ -98,8 +90,8 @@ export const PlayGame = ({ wordsQuantity, language, responseTime, typeGame }) =>
                   <div className={styles.timer}>{timer}</div>
 
                   <p className={styles.randomWord}>
-                     {language === 'english' && currentSteps.wordEn}
-                     {language === 'translated' && currentSteps.wordTr}
+                     {settings.language === 'english' && currentSteps?.wordEn}
+                     {settings.language === 'translated' && currentSteps?.wordTr}
                   </p>
 
                   <Form className={styles.form} onSubmit={handleSubmitResponse}>
@@ -117,7 +109,7 @@ export const PlayGame = ({ wordsQuantity, language, responseTime, typeGame }) =>
                   Press <span>"Enter"</span> for send your response
                </SupportText>
             </>
-         )}
-      </Window>
+         </Window>
+      </>
    )
 }

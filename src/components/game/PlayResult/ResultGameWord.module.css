@@ -1,0 +1,97 @@
+.window {
+   margin: 10vh auto 50px auto;
+}
+
+.correctAnswers {
+   font-size: var(--fsz-big);
+   color: var(--col-main);
+   text-align: center;
+   font-weight: 600;
+   margin-bottom: 30px;
+}
+
+.table {
+   width: 100%;
+   border: 3px solid #9c9c56;
+   margin-bottom: 30px;
+   table-layout: fixed;
+   border-collapse: collapse;
+}
+
+.table thead {
+   font-size: var(--fsz-big);
+   color: var(--col-title);
+   font-weight: 700;
+   line-height: 150%;
+   text-shadow: 2px 2px 3px rgb(218, 86, 86);
+   background-color: #dbeec9;
+}
+
+.table thead th:nth-child(1) {
+   width: 30%;
+}
+
+.table thead th:nth-child(2) {
+   width: 30%;
+}
+
+.table thead th:nth-child(3) {
+   width: 30%;
+}
+
+.table thead th:nth-child(4) {
+   width: 10%;
+}
+
+.table tbody tr {
+   margin-bottom: 5px;
+}
+
+.table tbody td {
+   padding: 5px 0px 5px 5px;
+   font-size: var(--fsz-main);
+   line-height: 133%;
+   color: var(--col-main);
+   border-bottom: 1px solid rgb(231, 121, 121);
+   text-align: center;
+   font-weight: 600;
+}
+
+.active {
+   display: flex;
+   justify-content: space-between;
+}
+
+.correct {
+   background-image: radial-gradient(
+      circle at 119.31% 50%,
+      #d4dd1e 0,
+      #c2e22b 8.33%,
+      #aee639 16.67%,
+      #99ea47 25%,
+      #81ed57 33.33%,
+      #65f067 41.67%,
+      #3cf278 50%,
+      #00f489 58.33%,
+      #00f69b 66.67%,
+      #00f7ae 75%,
+      #00f8c1 83.33%,
+      #00f9d3 91.67%,
+      #00f9e6 100%
+   );
+}
+
+.unCorrect {
+   background-image: radial-gradient(
+      circle at 32.75% 54.62%,
+      #e6ab4a 0,
+      #eba044 12.5%,
+      #ee9540 25%,
+      #f0883d 37.5%,
+      #f2793c 50%,
+      #f3693d 62.5%,
+      #f35940 75%,
+      #f34846 87.5%,
+      #f3364e 100%
+   );
+}

@@ -10,7 +10,7 @@ import { TbShare3 } from 'react-icons/tb'
 import { BiPlus } from 'react-icons/bi'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useNavigate } from 'react-router-dom'
-import { addWordIntoDictionary } from '../../../api/json-server'
+import { addWordIntoDictionary, checkWordIntoDictionary } from '../../../api/json-server'
 import { Switcher } from '../../../ui/Switcher'
 import { WindowTitle } from '../../../ui/WindowTitle'
 import { useData } from '../../../context/EnterFieldContext'
@@ -21,6 +21,7 @@ export const AddWord = (props) => {
    const { data, setValues } = useData()
    const [alertOk, displayAlertOk] = useAlert()
    const [alertError, displayAlertError] = useAlert()
+   const navigate = useNavigate()
 
    const schema = yup.object({
       wordEn: yup.string().trim().lowercase().required('Field should be filled'),
@@ -49,8 +50,6 @@ export const AddWord = (props) => {
       resolver: yupResolver(schema),
    })
 
-   const navigate = useNavigate()
-
    const btnBackHandler = () => {
       reset()
       setValues()
@@ -63,6 +62,12 @@ export const AddWord = (props) => {
             setValues({ ...data, isFavorite: false })
             return navigate('/add-note')
          }
+
+         // if this word already in the dictionary throw Error
+
+         await checkWordIntoDictionary(data.wordEn)
+
+         // if this word not in the dictonary, it will added
 
          await addWordIntoDictionary({ ...data, isFavorite: false })
 
@@ -86,7 +91,7 @@ export const AddWord = (props) => {
 
             <Form control={control} noValidate onSubmit={handleSubmit(formSubmitHandler)}>
                <Field
-                  label="Word (english)"
+                  label="Word"
                   type="text"
                   hasError={!!errors.wordEn}
                   error={errors.wordEn?.message}
@@ -95,7 +100,7 @@ export const AddWord = (props) => {
                   {...register('wordEn')}
                />
                <Field
-                  label="Word (translate)"
+                  label="Translate"
                   type="text"
                   hasError={!!errors.wordTr}
                   error={errors.wordTr?.message}
@@ -104,7 +109,7 @@ export const AddWord = (props) => {
                   {...register('wordTr')}
                />
                <Field
-                  label="Sentence example (english)"
+                  label="Sentence"
                   type="text"
                   hasError={!!errors.sentenceEn}
                   error={errors.sentenceEn?.message}
@@ -113,7 +118,7 @@ export const AddWord = (props) => {
                   {...register('sentenceEn')}
                />
                <Field
-                  label="Sentence example (translate)"
+                  label="Sentence Translate"
                   type="text"
                   hasError={!!errors.sentenceTr}
                   error={errors.sentenceTr?.message}

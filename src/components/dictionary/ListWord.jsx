@@ -1,6 +1,6 @@
 import styles from './ListWord.module.css'
 import React, { useEffect, useState } from 'react'
-import { deleteWord, getWordsFromDataBase, putChangeWord } from '../../api/json-server'
+import { deleteWord, getWordsFromDataBase, putChangeWord, searchWord } from '../../api/json-server'
 import { ItemWord } from './ItemWord'
 import { Preloader } from '../../ui/Preloader'
 import { Note } from './note/Note'
@@ -9,34 +9,48 @@ import { useNavigate } from 'react-router-dom'
 import { BiError } from 'react-icons/bi'
 import { Pagination } from './Pagination'
 
-export const ListWord = ({ onDisplayAlertOk, onDisplayAlertError, onSetTotalWords }) => {
+export const ListWord = ({
+   onDisplayAlertOk,
+   onDisplayAlertError,
+   onSetTotalWords,
+   searchInput,
+}) => {
    const [wordsList, setWordsList] = useState(null)
+   const [limitWordOnPage] = useState(15)
    const [dictionaryInfo, setDictionaryInfo] = useState({})
    const [isLoadingData, setIsLoadingData] = useState(false)
    const [noteWord, setNoteWord] = useState(null)
    const [crashLoadDataErrorMessage, setCrashLoadDataErrorMessage] = useState('')
+   const [searchWordErrorMessage, setSearchWordErrorMessage] = useState('')
    const [currentPage, setCurrentPage] = useState(1)
 
    const navigate = useNavigate()
 
-   const getNewData = async (page, limit = 15) => {
+   useEffect(() => {
+      setIsLoadingData(true)
+      getNewData(currentPage)
+      setIsLoadingData(false)
+   }, [currentPage, searchInput])
+
+   const getNewData = async (page, limit = limitWordOnPage) => {
       try {
-         const { data, dictionaryInfo } = await getWordsFromDataBase(page, limit)
+         const { data, dictionaryInfo } = !searchInput
+            ? await getWordsFromDataBase(page, limit)
+            : await searchWord(page, limit, searchInput)
+
          setWordsList(data)
          setDictionaryInfo(dictionaryInfo)
          onSetTotalWords(dictionaryInfo.totalCount)
+
+         data.length === 0
+            ? setSearchWordErrorMessage('Sorry, nothing was found in the dictionary')
+            : setSearchWordErrorMessage('')
       } catch (error) {
          setCrashLoadDataErrorMessage(error.message)
          setIsLoadingData(false)
          setWordsList(false)
       }
    }
-
-   useEffect(() => {
-      setIsLoadingData(true)
-      getNewData(currentPage)
-      setIsLoadingData(false)
-   }, [currentPage])
 
    const onFavorite = async (data) => {
       try {
@@ -77,7 +91,7 @@ export const ListWord = ({ onDisplayAlertOk, onDisplayAlertError, onSetTotalWord
          <div className={styles.wordList}>
             {isLoadingData && <Preloader className={styles.preloader} />}
 
-            {wordsList && wordsList.length === 0 && !isLoadingData && (
+            {wordsList && wordsList.length === 0 && !isLoadingData && !searchInput && (
                <p className={styles.listMessage}>
                   Please, press on the button "ADD NEW WORD" for add word into dictionary!
                </p>
@@ -101,15 +115,21 @@ export const ListWord = ({ onDisplayAlertOk, onDisplayAlertError, onSetTotalWord
                      {...item}
                   />
                ))}
+
+            {searchWordErrorMessage && wordsList.length === 0 && (
+               <p className={styles.searchError}>{searchWordErrorMessage}</p>
+            )}
          </div>
 
-         {!crashLoadDataErrorMessage && (
-            <Pagination
-               dictionaryInfo={dictionaryInfo}
-               currentPage={currentPage}
-               onSetCurrentPage={setCurrentPage}
-            />
-         )}
+         {!crashLoadDataErrorMessage &&
+            !searchWordErrorMessage &&
+            dictionaryInfo.totalCount > limitWordOnPage && (
+               <Pagination
+                  sumPages={dictionaryInfo.allPages}
+                  currentPage={currentPage}
+                  onSetCurrentPage={setCurrentPage}
+               />
+            )}
       </>
    )
 }

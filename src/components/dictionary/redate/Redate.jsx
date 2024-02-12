@@ -4,7 +4,11 @@ import { WindowTitle } from '../../../ui/WindowTitle'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useState } from 'react'
 import { Button } from '../../../ui/Button'
-import { getWordFromDataBase, putChangeWord } from '../../../api/json-server'
+import {
+   checkWordIntoDictionary,
+   getWordFromDataBase,
+   putChangeWord,
+} from '../../../api/json-server'
 import { Preloader } from '../../../ui/Preloader'
 import { BiPencil, BiShare } from 'react-icons/bi'
 import { Field } from '../../../ui/Field'
@@ -78,6 +82,12 @@ export const Redate = (props) => {
          if (dataForSend.note?.length > 0) {
             dataForSend.hasNote = true
          }
+
+         // if this word already in the dictionary throw Error
+
+         //  await checkWordIntoDictionary(dataForSend.wordEn)
+
+         // if this word not in the dictonary, it will changed
 
          await putChangeWord(dataForSend)
 

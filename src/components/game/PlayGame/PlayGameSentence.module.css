@@ -1,0 +1,77 @@
+.btnStop {
+   text-transform: uppercase;
+}
+
+.window {
+   margin: 10vh auto 0 auto;
+}
+
+.stepInfo {
+   text-align: right;
+   font-size: var(--fsz-big);
+   font-style: italic;
+   font-weight: 600;
+   color: var(--col-main);
+   margin-bottom: 70px;
+}
+
+.game {
+   margin-bottom: 70px;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   color: var(--col-main);
+}
+
+.game > :not(:last-child) {
+   margin-bottom: 50px;
+}
+
+.game > :nth-child(3) {
+   height: 50px;
+}
+
+.gameNoTime {
+   margin-bottom: 70px;
+   display: grid;
+   grid-template-rows: 1fr 50px;
+   grid-gap: 50px;
+   color: var(--col-main);
+   justify-items: center;
+}
+
+.randomSentence {
+   padding-left: 10px;
+   font-size: var(--fsz-xxl);
+   font-weight: 600;
+   background-color: #e9dbdb;
+   width: 100%;
+   text-align: center;
+   border-radius: 10px;
+}
+
+.timer {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   width: 150px;
+   height: 150px;
+   border-radius: 50%;
+   background-color: #e9dbdb;
+   font-size: var(--fsz-2xxl);
+   grid-column: 1 / 3;
+}
+
+.form {
+   width: 100%;
+}
+
+.form input {
+   width: 100%;
+   padding-left: 10px;
+   font-size: var(--fsz-big);
+   color: var(--col-typography);
+   height: 100%;
+   border-radius: 10px;
+   outline-color: var(--col-main);
+}

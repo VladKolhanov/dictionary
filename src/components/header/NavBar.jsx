@@ -8,7 +8,7 @@ export const NavBar = () => {
          <NavLink className={activeLink} to="dictionary">
             Dictionary
          </NavLink>
-         <NavLink className={activeLink} to="game">
+         <NavLink className={activeLink} to="select-game">
             Game
          </NavLink>
       </nav>

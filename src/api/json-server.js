@@ -12,6 +12,16 @@ export const addWordIntoDictionary = async (data) => {
    }
 }
 
+export const checkWordIntoDictionary = async (word) => {
+   const response = await fetch(`${baseUrl}?wordEn=${word}`)
+
+   const isContainedWord = await response.json()
+
+   if (isContainedWord.length !== 0) {
+      throw new Error('This word is already in the dictionary')
+   }
+}
+
 export const getWordsFromDataBase = async (page, limit) => {
    const response = await fetch(`${baseUrl}?_sort=id&_order=desc&_page=${page}&_limit=${limit}`)
 
@@ -45,6 +55,26 @@ export const getWordsForGame = async (limit) => {
    }, [])
 
    return words
+}
+
+export const getSentencesForGame = async (limit) => {
+   const response =
+      limit === 'all'
+         ? await fetch(`${baseUrl}?_sort=id&_order=desc`)
+         : await fetch(`${baseUrl}?_sort=id&_order=desc&_limit=${limit}`)
+
+   if (!response.ok) {
+      throw new Error('Failed to load data. Please check your network access')
+   }
+
+   const data = await response.json()
+
+   const sentences = data.reduce((acc, item) => {
+      acc.push({ sentenceEn: item.sentenceEn, sentenceTr: item.sentenceTr, id: item.id })
+      return acc
+   }, [])
+
+   return sentences
 }
 
 export const getWordFromDataBase = async (wordId) => {
@@ -84,4 +114,21 @@ export const deleteWord = async (id) => {
 
    const data = await response.json()
    return data
+}
+
+export const searchWord = async (page, limit, search) => {
+   const response = await fetch(
+      `${baseUrl}?_sort=id&_order=desc&_page=${page}&_limit=${limit}&q=${search}`
+   )
+
+   if (!response.ok) {
+      throw new Error('Failed to load data. Please return to dictionary and try again.')
+   }
+
+   const data = await response.json()
+
+   const totalCount = response.headers.get('X-Total-Count')
+   const allPages = Math.ceil(totalCount / limit)
+
+   return { data, dictionaryInfo: { totalCount, allPages } }
 }

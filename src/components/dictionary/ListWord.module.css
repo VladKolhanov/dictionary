@@ -29,3 +29,9 @@
 .listMessage.error {
    color: var(--col-error);
 }
+
+.searchError {
+   text-align: center;
+   font-size: var(--fsz-xxl);
+   color: var(--col-main);
+}

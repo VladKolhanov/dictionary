@@ -3,10 +3,10 @@ import styles from './Pagination.module.css'
 import { BsChevronDoubleRight } from 'react-icons/bs'
 import { BsChevronDoubleLeft } from 'react-icons/bs'
 
-export const Pagination = ({ dictionaryInfo, currentPage, onSetCurrentPage }) => {
+export const Pagination = ({ sumPages, currentPage, onSetCurrentPage }) => {
    const pages = []
 
-   for (let i = 1; i <= dictionaryInfo.allPages; i++) {
+   for (let i = 1; i <= sumPages; i++) {
       pages.push(i)
    }
 
